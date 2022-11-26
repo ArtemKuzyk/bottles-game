@@ -3,7 +3,8 @@ import {BotlleSecondVersion} from '../bottle';
 import './main.css'
 import {Home} from './home'
 import {Settings} from './Settings'
-import {BrowserRouter, Route, Link, withRouter, Router, Routes} from "react-router-dom";
+// import {BrowserRouter, Route, Link, withRouter, Router, Routes} from "react-router-dom";
+import {HashRouter, Route, Link, withRouter, Router, Routes} from "react-router-dom";
 /////////////////////////////////////////////////////////////
 
 class Main extends React.Component{
@@ -33,7 +34,7 @@ class Main extends React.Component{
 
     render(){
         return(
-            <BrowserRouter>
+            <HashRouter>
                 {(this.state.isNavBarHidden) ? null : <Home changeState = {this.changeState}/> }
                 {/* {(this.state.isNavBarHidden) ? null : <Settings changeState = {this.changeState}/> } */}
                 {/* <div className="main" onClick={() => this.changeState()}> */}
@@ -46,7 +47,7 @@ class Main extends React.Component{
                     <Route exact path='settings' element={< Settings />}></Route>
                     <Route exact path='bottle' element={< BotlleSecondVersion />}></Route>
                 </Routes>
-            </BrowserRouter>
+            </HashRouter>
             );
     }
     
