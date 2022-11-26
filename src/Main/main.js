@@ -16,6 +16,17 @@ class Main extends React.Component{
         this.changeState = this.changeState.bind(this);
     }
 
+    componentDidUpdate() {
+            localStorage.setItem("isNavBarHidden", this.state.isNavBarHidden); //t changeState
+        }
+
+    componentDidMount() {
+        const isNavBarHidden = JSON.parse(localStorage.getItem("isNavBarHidden"));
+        this.setState({ isNavBarHidden });
+      }
+      
+      
+
     changeState(){
         this.setState(prevState => ({isNavBarHidden: !prevState.isNavBarHidden}));
     }
@@ -31,7 +42,7 @@ class Main extends React.Component{
                     {/* <Settings /> */}
                 {/* </div> */}
                 <Routes>
-                    {/* <Route exact path='/' element={< Home />}></Route> */}
+                    <Route exact path='/' element={< Home />}></Route>
                     <Route exact path='settings' element={< Settings />}></Route>
                     <Route exact path='bottle' element={< BotlleSecondVersion />}></Route>
                 </Routes>

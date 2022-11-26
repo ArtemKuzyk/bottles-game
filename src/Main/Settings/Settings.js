@@ -1,7 +1,9 @@
 import './settings.css'
 import React from 'react';
-// import {BrowserRouter, Route, Link, withRouter, Router, Routes} from "react-router-dom";
+import {BrowserRouter, Route, Link, withRouter, Router, Routes} from "react-router-dom";
 import {BotlleSecondVersion} from '../../bottle';
+import { Home } from '../home';
+// import { Link } from 'react-router-dom';
 // import Settings from '../Settings';
 ///////////////////////////////////////////
 
@@ -13,7 +15,7 @@ class Settings extends React.Component{
                 <form action="">
                     <h2>Settings</h2>
                     <div>
-                        <label for="bottles">Bottles</label>
+                        <label htmlFor ="bottles">Bottles</label>
                         <div>
                             <input type="range" name="bottles" defaultValue="3" id="bottles" min="3" max="10" list="list"/><br/>
                             <datalist id="list">
@@ -29,7 +31,7 @@ class Settings extends React.Component{
                         </div>
                     </div>
                     <div>
-                        <label for="colors">Colors</label>
+                        <label htmlFor ="colors">Colors</label>
                         <div>
                             <input type="range" name="colors" defaultValue="3" id="" min="3" max="10" list="list"/><br/>
                             <datalist id="list">
@@ -45,7 +47,7 @@ class Settings extends React.Component{
                         </div>
                     </div>
                     <div>
-                        <label for="sections">Sections</label>
+                        <label htmlFor ="sections">Sections</label>
                         <div>
                             <input type="range" name="sections" defaultValue="3" id="" min="3" max="10" list="list"/><br/>
                             <datalist id="list">
@@ -61,10 +63,12 @@ class Settings extends React.Component{
                         </div>
                     </div>
                     <div>
-                        <label for="sound">Sound</label>
+                        <label htmlFor ="sound">Sound</label>
                         <input type="checkbox" name="sound" defaultChecked="checked" id=""/>
                     </div>
-                    <button type="submit">Apply</button>
+                    <Link to="/">
+                        <button type="submit">Apply</button>
+                    </Link>
                 </form>
               </section>
           </>  

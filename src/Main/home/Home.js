@@ -32,7 +32,7 @@ class Home extends React.Component{
                         </Link>
                     </div>
                     <div className="outerContainer">
-                        <Link to="/About-me" className="innerContainer" onClick={() => this.props.changeState()}>
+                        <Link to="/" className="innerContainer" onClick={() => this.props.changeState()}>
                             <h3>About me</h3>
                         </Link>
                     </div>
