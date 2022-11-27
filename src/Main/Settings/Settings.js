@@ -1,13 +1,23 @@
 import './settings.css'
 import React from 'react';
-import {BrowserRouter, Route, Link, withRouter, Router, Routes} from "react-router-dom";
-import {BotlleSecondVersion} from '../../bottle';
-import { Home } from '../home';
+import {Link,} from "react-router-dom";
+// import {BotlleSecondVersion} from '../../bottle';
+// import { Home } from '../home';
 // import { Link } from 'react-router-dom';
 // import Settings from '../Settings';
 ///////////////////////////////////////////
 
 class Settings extends React.Component{
+
+    // constructor(){
+    //     super();
+    //     this.state = {
+    //         isSettingsHidden: false
+    //     };
+    // }
+
+
+
     render(){
         return(
           <>
@@ -66,8 +76,8 @@ class Settings extends React.Component{
                         <label htmlFor ="sound">Sound</label>
                         <input type="checkbox" name="sound" defaultChecked="checked" id=""/>
                     </div>
-                    <Link to="/">
-                        <button type="submit">Apply</button>
+                    <Link to="main" >
+                        <button type="submit" onClick={() => this.props.changeState()}>Apply</button>
                     </Link>
                 </form>
               </section>
