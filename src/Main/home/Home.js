@@ -15,26 +15,26 @@ class Home extends React.Component{
             <>
                 <section className="section-menu">
                     <div className="outerContainer">
-                        <Link to="bottle" className="innerContainer" onClick={() => this.props.changeState()}>
-                        {/* <Link to="bottle" className="innerContainer"> */}
+                        {/* <Link to="bottle" className="innerContainer" onClick={() => this.props.changeState(true)}> */}
+                        <Link to="bottle" className="innerContainer">
                             <h3>Start</h3>
                         </Link>
                     </div>
                     <div className="outerContainer">
-                        <Link to="settings" className="innerContainer"  onClick={() => this.props.changeState()}>
-                        {/* <Link to="settings" className="innerContainer"> */}
+                        {/* <Link to="settings" className="innerContainer"  onClick={() => this.props.changeState(true)}> */}
+                        <Link to="settings" className="innerContainer">
                             <h3>Settings</h3>
                         </Link>
                     </div>
                     <div className="outerContainer">
-                        <Link to="/" className="innerContainer" onClick={() => this.props.changeState()}>
-                        {/* <Link to="/" className="innerContainer"> */}
+                        {/* <Link to="/" className="innerContainer" onClick={() => this.props.changeState(true)}> */}
+                        <Link to="/" className="innerContainer">
                             <h3>Quit</h3>
                         </Link>
                     </div>
                     <div className="outerContainer">
-                        <Link to="/" className="innerContainer" onClick={() => this.props.changeState()}>
-                        {/* <Link to="/" className="innerContainer"> */}
+                        {/* <Link to="/" className="innerContainer" onClick={() => this.props.changeState(true)}> */}
+                        <Link to="/" className="innerContainer">    
                             <h3>About me</h3>
                         </Link>
                     </div>
