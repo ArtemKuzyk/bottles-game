@@ -15,9 +15,9 @@ class Main extends React.Component{
         // };
         this.changeState = this.changeState.bind(this);
         this.state = {
-            'bottles' : 7,
+            'bottles' : 3,
             'colors' : 3,
-            'sections' : 8,
+            'sections' : 3,
             'sound' : "checked"
         }
     }

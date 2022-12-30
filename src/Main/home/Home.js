@@ -44,21 +44,40 @@ class Home extends React.Component{
     }
 }
 
-let centerPoint = [window.innerHeight/2, window.innerWidth/2];
-let catetWidth = Math.floor(Math.sqrt(centerPoint[0]**2 + centerPoint[1]**2));
+// let centerPoint = [window.innerHeight/2, window.innerWidth/2];
+// let catetWidth = Math.floor(Math.sqrt(centerPoint[0]**2 + centerPoint[1]**2));
 
-let rotate = Math.atan(window.innerHeight/window.innerWidth) * (180/Math.PI);
-let rotateFirstElement = rotate - 90;
-let skewYFirstElement = Math.abs(rotateFirstElement) - (90 - Math.abs(rotateFirstElement));
+// let rotate = Math.atan(window.innerHeight/window.innerWidth) * (180/Math.PI);
+// let rotateFirstElement = rotate - 90;
+// let skewYFirstElement = Math.abs(rotateFirstElement) - (90 - Math.abs(rotateFirstElement));
 
-let rotateSecondElement = -Math.atan((window.innerHeight/2)/(window.innerWidth/2)) * (180/Math.PI);
+// let rotateSecondElement = -Math.atan((window.innerHeight/2)/(window.innerWidth/2)) * (180/Math.PI);
 
 const transformOriginValue = ['left top', 'right top', 'right bottom', 'left bottom'];
 const sectoinColors = ['green', 'blue', 'red', 'yellow'];
 
 function changeOuterContainerStyle(){
+
+    ////
+    let centerHeight = window.innerHeight/2;
+    let centerWidth;
+    if(window.innerWidth > 1000){
+        centerWidth = 1000;
+    } else {
+        centerWidth = window.innerWidth;
+    }
+    
+    ////
+    let centerPoint = [window.innerHeight/2, centerWidth/2];
+    let catetWidth = Math.floor(Math.sqrt(centerPoint[0]**2 + centerPoint[1]**2));
+
+    let rotate = Math.atan(window.innerHeight/centerWidth) * (180/Math.PI);
+    let rotateFirstElement = rotate - 90;
+    let skewYFirstElement = Math.abs(rotateFirstElement) - (90 - Math.abs(rotateFirstElement));
+
+    let rotateSecondElement = -Math.atan((window.innerHeight/2)/(centerWidth/2)) * (180/Math.PI);
+
     const el = document.querySelectorAll('.section-menu > *');
-    // console.log(el);
     for (let i = 0; i < el.length; i++) {
         el[i].style.width = catetWidth + 'px';
         el[i].style.height = catetWidth + 'px';
@@ -105,5 +124,9 @@ function changeSectionNameStyle(){
     sectionName[3].style.right = '10%';
     sectionName[3].style.bottom = '10%';
 }
+
+window.addEventListener("resize", () => {
+    changeOuterContainerStyle();
+})
 
 export {Home};

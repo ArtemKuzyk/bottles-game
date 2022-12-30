@@ -1,58 +1,18 @@
 import './Bottle.css';
 import React from 'react';
 import {Link} from "react-router-dom";
+import { emptyColor, emptyColorRGB, colors, Bottles, sections } from "./game-settings"
 ///////////////////////////////////////////
 
-const emptyColor = '#80ffd4';
-const emptyColorRGB = 'rgb(128, 255, 212)';
-const colors = [
-  '#00ff26', 
-  '#ff0000', 
-  '#ffa500', 
-  '#00d4ff',
-  '#ffff00',
-  '#0000ff',
-  '#f007a7',
-  '#006c36',
-  '#867575',
-  '#7227ac'
-];
-
-const Bottles = [
-  {id:'1', value:1},
-  {id:'2', value:2},
-  {id:'3', value:3},
-  {id:'4', value:4},
-  {id:'5', value:5},
-  {id:'6', value:6},
-  {id:'7', value:7},
-  {id:'8', value:8},
-  {id:'9', value:9},
-  {id:'10', value:10}
-]
-
-const sections = {
-  3:[10, 11, 40, 41, 70, 71],
-  4:[10, 31.5, 32.5, 54, 55, 76.5, 77,5],
-  5:[10, 27, 28, 45, 46, 63, 64, 81, 82],
-  6:[10, 24, 25, 39, 40, 54, 55, 69, 70, 84, 85],
-  7:[10, 21.85, 22.85, 34.7, 35.7, 47.55, 48.55, 60.4, 61.4, 73.25, 74.25, 86.1, 87.1],
-  8:[10, 20.25, 21.25, 31.5, 32.5, 42.75, 43.75, 54, 55, 65.25, 66.25, 76.5, 77.5, 87.75, 88.72],
-  9:[10, 19, 20, 29, 30, 39, 40, 49, 50, 59, 60, 69, 70, 79, 80, 89, 90],
-  10:[10, 18, 19, 27, 28, 36, 37, 45, 46, 54, 55, 63, 64, 72, 73, 81, 82, 90, 91]
-}
-
 let existingColors;
-let coloredBottle = 5;
-const minColors = 3;
 
 ///////////////////////////////////////////
 class Bottle extends React.Component{
   
-  constructor(id) {
-    super(id);
-    this.id = id.id;
-    this.styleValue = {"background" : `linear-gradient(180deg, ${emptyColor} 10%,  ${getColorSection()}`};
+  constructor(props) {
+    super(props);
+    this.id = props.id;
+    this.styleValue = {"background" : `linear-gradient(180deg, ${emptyColor} 10%,  ${getColorSection(props.sections)}`};
     this.firstBottleStyle = {};
     // this.state = {"background" : `linear-gradient(180deg, ${emptyColor} 10%,  ${getColorSection()}`};
   }
@@ -192,14 +152,16 @@ function checkEmptyValue(style, booleanVariable = false){
   }
 }
 
-function getColorSection(){
-  let bottleSections = 3;
+function getColorSection(bottleSections){
+  // let bottleSections = 10;
+  bottleSections = +bottleSections;
   let gradientValue = '';
   for (let i = 1; i < sections[bottleSections].length; i++) {
     let color = getOneColor();
     if (color === undefined) color = emptyColor;
     if(i === sections[bottleSections].length - 1){
       gradientValue += ` ${color} ${sections[bottleSections][i]}%`
+      console.log("123")
     } else {
       gradientValue += ` ${color} ${sections[bottleSections][i]}%, ${color} ${sections[bottleSections][i+1]}%,`
       i++;
@@ -210,13 +172,14 @@ function getColorSection(){
 
 //Отримуємо кольори в масиві для подальшого розподілу по пляшкам
 
-function getColors(){
+function getColors(bottleNumbers, colorNumbers, bottleSections){
   let existingColors = [];
-  let bottleSections = 3;
+  // let bottleSections = 3;
   let colorIterator = 0;
-  for (let i = 0; i < coloredBottle; i++) {
-    if(colorIterator === minColors) colorIterator = 0;
-    for (let j = 0; j < bottleSections; j++) {
+  for (let i = 0; i < bottleNumbers; i++) {
+    if(+colorIterator === +colorNumbers) colorIterator = 0;
+    console.log(colorIterator)
+    for (let j = 0; j < +bottleSections; j++) {
       existingColors.push(colors[colorIterator]);
     }
     colorIterator++;
@@ -233,13 +196,19 @@ function getOneColor(){
 }
 
 //add numberOfBottle Variable from levels and settings who were stored in local storage
-let bottleNumbers = 5;
-let iterator = 0;
-const numberOfBottle = Bottles.map(({id}) => {
-  if (iterator === bottleNumbers + 1) return false;
-  iterator++;
-  return <Bottle id={id} />  //call class Bottle
-});
+
+const numberOfBottle = (bottleNumbers, bottleSections) => {
+  let iterator = 0;
+  console.log(iterator)
+  // return Bottles.map(({id}) => {
+  return Bottles.map((item) => {
+    iterator++;
+    if (item.id > (bottleNumbers + 1)) return false;
+    return <Bottle id = {item.id} sections = {bottleSections}/>  //call class Bottle
+  });
+}
+
+  
 
 
 ///////////////////////////////////////
@@ -248,14 +217,14 @@ const numberOfBottle = Bottles.map(({id}) => {
 ///////////////////////////////////////
 
 function BotlleSecondVersion(props){
-  existingColors = getColors();
+  existingColors = getColors(props.state.bottles, props.state.colors, props.state.sections);
   return(
     <div className="container">
       <Link to="../" >
         {/* <div className="home-image" onClick={() => props.changeState()}></div> */}
         <div className="home-image"></div>
       </Link>
-      {numberOfBottle}
+      {numberOfBottle(props.state.bottles, props.state.sections)}
     </div>
   );
 }
